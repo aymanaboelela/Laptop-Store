@@ -13,7 +13,7 @@ Implemented APIs to retrieve and display real-time data of available laptops, en
 Incorporated animations within the app to enhance user experience by providing smooth transitions and visually engaging interactions.
 
 ### 4. Bloc Architecture
-Leveraged Bloc (Business Logic Component) architecture for efficient state management, ensuring clarity and scalability within the application.
+BLoC (Business Logic Component) in Flutter is an architectural pattern used to separate business logic from user interface elements. It leverages Streams and Sinks for data processing and state management, ensuring a clear separation of responsibilities. BLoC enhances code reusability, testability, and scalability in Flutter applications.
 
 ## Vision:
 
