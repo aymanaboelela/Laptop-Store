@@ -31,3 +31,10 @@ The vision behind Laptop Store was to provide users with a user-friendly and fea
 ---
 
 **Note**: This README provides a concise overview of the project "Laptop Store," highlighting its key features and the technologies used. You may expand on these sections and add more details to cater to the specific requirements or nuances of your project.
+
+## Screen Shot in App
+![Capture1](https://github.com/aymanaboelela/Laptop-Store/assets/142680481/48bbfbe6-08f5-4b69-bc90-1de721dc0f3b)
+![Capture2](https://github.com/aymanaboelela/Laptop-Store/assets/142680481/67d770c5-ecc7-41eb-811c-6ea1a969359d)
+![Capture3](https://github.com/aymanaboelela/Laptop-Store/assets/142680481/5d002844-f869-426d-a371-d01c3e136224)
+![Capture4](https://github.com/aymanaboelela/Laptop-Store/assets/142680481/3d626a39-71ad-44b9-9fe6-dae0d9b09b48)
+![Capture5](https://github.com/aymanaboelela/Laptop-Store/assets/142680481/8b944b41-6f00-4c0c-9871-c4f70c09c12d)
