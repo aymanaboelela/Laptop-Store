@@ -1,17 +1,14 @@
-
 import 'package:flutter/material.dart';
 import '../../../core/constant/color.dart';
 import '../../../core/constant/image.dart';
-import '../../../core/helper/custom_print.dart';
 import '../../../core/helper/responsive.dart';
 import '../../../data/model/product_model.dart';
-import '../../../data/service/login_service.dart';
-import '../product_screen/product_custom_widget/product_card.dart';
-import '../product_screen/product_custom_widget/Catogry.dart';
-import '../product_screen/product_custom_widget/category_list_view.dart';
-import '../product_screen/product_custom_widget/category_list_view_2.dart';
-import '../product_screen/product_custom_widget/custom_all_product.dart';
-import '../product_screen/product_custom_widget/search_bar.dart';
+import '../../../data/service/service.dart';
+import '../../widget/carousel_slider.dart';
+import '../../widget/product_custom_widget/product_card.dart';
+import '../../widget/product_custom_widget/category_list_view_2.dart';
+import '../../widget/product_custom_widget/custom_all_product.dart';
+import '../../widget/product_custom_widget/search_bar.dart';
 
 class HomeProduct extends StatefulWidget {
   const HomeProduct({super.key});
@@ -21,24 +18,19 @@ class HomeProduct extends StatefulWidget {
 }
 
 class _HomeProductState extends State<HomeProduct> {
-  List<Products> helpModel = [];
+  List<ProductsModels> ListData = [];
   @override
   void initState() {
     super.initState();
-    Service.init();
-    getProduct();
+    _loadData();
   }
 
-  Future<void> getProduct() async {
-    helpModel = await Service.getProduct();
-    kPrint("DATA: ${helpModel.length}");
-    setState(() {});
+  void _loadData() async {
+    List<ProductsModels> data = await Service.getProduct();
+    setState(() {
+      ListData = data;
+    });
   }
-
-  List catogry = const [
-    Category(image: kAcerP1),
-    Category(image: kAcerP2),
-  ];
 
   List catogryProdact = const [
     CustemAllprodects(image: kAll, text: 'All'),
@@ -62,8 +54,14 @@ class _HomeProductState extends State<HomeProduct> {
             const SliverToBoxAdapter(
               child: TextItemListview(),
             ),
-            SliverToBoxAdapter(
-              child: CatogeryListView(catogry: catogry),
+            const SliverToBoxAdapter(
+              child: SizeVertical(value: 1),
+            ),
+            const SliverToBoxAdapter(
+              child: ScrollImage(),
+            ),
+            const SliverToBoxAdapter(
+              child: SizeVertical(value: 1),
             ),
             SliverToBoxAdapter(
               child: CotogeryListViwe2(catogryProdact: catogryProdact),
@@ -75,23 +73,36 @@ class _HomeProductState extends State<HomeProduct> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // Number of columns
                 crossAxisSpacing: 0, // Horizontal spacing between items
-                mainAxisSpacing: 30, // Vertical spacing between items
+                mainAxisSpacing: 20, // Vertical spacing between items
                 childAspectRatio: 0.85,
               ),
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: LaptopItem(
-                      image: helpModel[index].image!,
-                      productName: helpModel[index].name!,
-                      subTitle: helpModel[index].description!,
-                      price: helpModel[index].price!,
+                    child: FutureBuilder(
+                      future: Service.getProduct(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          ListData = snapshot.data!;
+                          return LaptopItem(data: ListData[index]);
+                        } else if (snapshot.hasError) {
+                          return const Center(
+                              child: Text("opps the error try again.."));
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                      },
                     ),
                   ); // Replace with your item widget
                 },
-                childCount: helpModel.length, // Replace with the number of items you have
+                childCount: ListData.length,
+                // Replace with the number of items you have
               ),
+            ),
+            const SliverToBoxAdapter(
+              child: SizeVertical(value: 5),
             ),
           ],
         ),

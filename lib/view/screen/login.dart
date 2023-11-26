@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../core/constant/image.dart';
@@ -15,7 +14,8 @@ class LoginPage extends StatelessWidget {
         children: [
           Image.asset(kBackgroundLoginPage),
           const LoginBackground(),
-          const CenterInput(),
+
+        const  CenterInput(),
         ],
       ),
     );

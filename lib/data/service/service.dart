@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 
-
 import '../../core/helper/custom_print.dart';
 import '../model/help_model.dart';
 import '../model/product_model.dart';
@@ -8,24 +7,13 @@ import '../model/product_model.dart';
 class Service {
   static Dio dio = Dio();
   static init() {
-    dio = Dio(BaseOptions(
+    dio = Dio(
+      BaseOptions(
         baseUrl: "http://magdsoft.ahmedshawky.fun/api/",
-        receiveDataWhenStatusError: true));
+        receiveDataWhenStatusError: true,
+      ),
+    );
   }
-
-  // //! GET
-  // static Future getService(
-  //     {required String path, Map<String, dynamic>? queryParameters}) async {
-  //   late Response response;
-  //   try {
-  //     response = await dio.get(path, queryParameters: queryParameters);
-  //     kPrint(response.data, title: response.statusCode.toString());
-  //   } on DioException catch (err) {
-  //     kPrint("error from dio :$err", title: response.statusCode.toString());
-  //   } catch (err) {
-  //     kPrint("golobal error:$err");
-  //   }
-  // }
 
   //! POST
   static Future<void> postData(
@@ -43,26 +31,19 @@ class Service {
   }
 
 //! GET HELP
-  static Future<List<Help>> getHelp() async {
+  static Future<List<HelpModels>> getHelp() async {
     try {
       Response response = await dio.get("getHelp");
 
       List<dynamic> helpJsonList = response.data['help'];
 
-      List<Help> helpModel = [];
+      List<HelpModels> helpModel = [];
 
       for (var element in helpJsonList) {
-        Help help = Help(
-            answer: element["answer"],
-            id: element["id"],
-            question: element["question"]);
+        HelpModels help = HelpModels.fromJson(element);
         helpModel.add(help);
       }
-
-      // List<Help> helpList =
-      //     helpJsonList.map((json) => Help.fromJson(json)).toList();
       kPrint(response.data['help'], title: response.statusCode.toString());
-      // return helpList;
       return helpModel;
     } catch (err) {
       throw Exception('Error from getHelp: $err');
@@ -70,30 +51,19 @@ class Service {
   }
 
 //! GET PRODUCT
-  static Future<List<Products>> getProduct() async {
+  static Future<List<ProductsModels>> getProduct() async {
     try {
       Response response = await dio.get("getProducts");
 
       List<dynamic> productJsonList = response.data['products'];
 
-      List<Products> productModel = [];
+      List<ProductsModels> productModel = [];
 
       for (var element in productJsonList) {
-        Products product = Products(
-            company: element["Products"],
-            description: element["description"],
-            image: element["image"],
-            price: element["price"],
-            type: element["type"],
-            name: element["name"],
-            id: element["id"]);
+        ProductsModels product = ProductsModels.fromJson(element);
         productModel.add(product);
       }
-
-      // List<Help> helpList =
-      //     helpJsonList.map((json) => Help.fromJson(json)).toList();
       kPrint(productJsonList, title: response.statusCode.toString());
-      // return helpList;
       return productModel;
     } catch (err) {
       throw Exception('Error from getHelp: $err');

@@ -1,40 +1,30 @@
-class Products {
-  int? id;
-  String? company;
-  String? name;
-  String? type;
-  String? price;
-  String? image;
-  String? description;
+class ProductsModels {
+  final int? id;
+  final String? company;
+  final String? name;
+  final String? type;
+  final String? price;
+  final String? image;
+  final String? description;
 
-  Products(
-      {this.id,
-      this.company,
-      this.name,
-      this.type,
-      this.price,
-      this.image,
-      this.description});
+  ProductsModels(
+      {required this.id,
+      required this.company,
+      required this.name,
+      required this.type,
+      required this.price,
+      required this.image,
+      required this.description});
 
-  Products.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    company = json['company'];
-    name = json['name'];
-    type = json['type'];
-    price = json['price'];
-    image = json['image'];
-    description = json['description'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['company'] = company;
-    data['name'] = name;
-    data['type'] = type;
-    data['price'] = price;
-    data['image'] = image;
-    data['description'] = description;
-    return data;
+  factory ProductsModels.fromJson(Map<String, dynamic> json) {
+    return ProductsModels(
+      id: json['id'],
+      company: json['company'],
+      name: json['name'],
+      type: json['type'],
+      price: json['price'],
+      image: json['image'],
+      description: json['description'],
+    );
   }
 }

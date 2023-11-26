@@ -1,20 +1,20 @@
-
 import 'package:flutter/material.dart';
-import '../../../core/constant/image.dart';
-import '../../../core/helper/responsive.dart';
-import '../../widget/custom_button.dart';
-import '../../widget/custom_container_view.dart';
-import '../../widget/custom_icon_back.dart';
-import '../../widget/over_view_text_info.dart';
+import '../../core/constant/image.dart';
+import '../../core/helper/responsive.dart';
+import '../widget/custom_button.dart';
+import '../widget/custom_container_view.dart';
+import '../widget/custom_icon_back.dart';
+import '../widget/over_view_text_info.dart';
 
 class ProdectPage extends StatefulWidget {
-  const ProdectPage(
-      {super.key,
-      required this.name,
-      required this.price,
-      required this.description});
-  final String name;
+  const ProdectPage({
+    super.key,
+    required this.name,
+    required this.price,
+    required this.description,
+  });
 
+  final String name;
   final String price;
   final String description;
 

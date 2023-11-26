@@ -40,18 +40,18 @@ class _HomePageState extends State<HomePage> {
           children: classSwitch,
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         backgroundColor: kBlue,
         child: const Icon(Icons.add, size: 35),
-        onPressed: () {},
+        onPressed: () {
+          //add rodact;
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        // shadow:
-        //     const Shadow(color: kGrey, blurRadius: 30, offset: Offset(2, -2)),
         icons: iconList,
         elevation: 100,
-
         inactiveColor: kGrey,
         activeColor: kBlue,
         activeIndex: _bottomNavIndex,
@@ -69,4 +69,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

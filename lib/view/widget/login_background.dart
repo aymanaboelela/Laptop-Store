@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import '../../core/constant/color.dart';
 import '../../core/constant/image.dart';
@@ -12,7 +11,7 @@ class LoginBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: SizeConfig.defaultSize! * 30,
+      top: SizeConfig.defaultSize! *30,
       child: Container(
         height: SizeConfig.screenHeight,
         width: SizeConfig.screenWidth,

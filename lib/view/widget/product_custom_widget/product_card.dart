@@ -1,24 +1,16 @@
-
 import 'package:flutter/material.dart';
-import '../../../../core/constant/color.dart';
-import '../../../../core/constant/image.dart';
-import '../../../../core/constant/route.dart';
-import '../../../../core/helper/responsive.dart';
-import '../../../../data/service/login_service.dart';
-import '../product_view.dart';
+import 'package:laptop_express/data/model/product_model.dart';
+import '../../../core/constant/color.dart';
+import '../../../core/helper/responsive.dart';
+import '../../screen/product_view.dart';
 
 class LaptopItem extends StatefulWidget {
   const LaptopItem({
     super.key,
-    required this.image,
-    required this.productName,
-    required this.subTitle,
-    required this.price,
+    required this.data,
   });
-  final String? image;
-  final String? productName;
-  final String? subTitle;
-  final String? price;
+  final ProductsModels data;
+
   @override
   State<LaptopItem> createState() => _LaptopItemState();
 }
@@ -36,9 +28,9 @@ class _LaptopItemState extends State<LaptopItem> {
               context,
               MaterialPageRoute(
                 builder: (context) => ProdectPage(
-                    description: widget.subTitle!,
-                    name: widget.productName!,
-                    price: widget.price!),
+                    description: widget.data.description!,
+                    name: widget.data.name!,
+                    price: widget.data.price!),
               ));
         },
         child: Container(
@@ -49,10 +41,10 @@ class _LaptopItemState extends State<LaptopItem> {
             ),
             shadows: const [
               BoxShadow(
-                color: Color.fromARGB(25, 47, 46, 46),
+                color: Color.fromARGB(20, 40, 40, 40),
                 blurRadius: 7,
                 offset: Offset(2, 2),
-                spreadRadius: 5,
+                spreadRadius: 3,
               ),
             ],
           ),
@@ -79,7 +71,7 @@ class _LaptopItemState extends State<LaptopItem> {
                   child: Image.network(
                     height: SizeConfig.defaultSize! * 11.5,
                     width: SizeConfig.defaultSize! * 11.5,
-                    widget.image ??
+                    widget.data.image ??
                         "https://cdn.thewirecutter.com/wp-content/media/2023/06/bestlaptops-2048px-9765.jpg",
                     scale: 1,
                   ),
@@ -117,7 +109,7 @@ class _LaptopItemState extends State<LaptopItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.productName ?? "No Title",
+                      widget.data.name ?? "No Title",
                       style: const TextStyle(
                         color: Color(0xFF0062BD),
                         fontSize: 18,
@@ -127,7 +119,7 @@ class _LaptopItemState extends State<LaptopItem> {
                     ),
                     const SizeVertical(value: 0.8),
                     Text(
-                      widget.subTitle ?? "No Title",
+                      widget.data.description ?? "No Title",
                       maxLines: 2,
                       overflow: TextOverflow.clip,
                       style: const TextStyle(
@@ -140,7 +132,7 @@ class _LaptopItemState extends State<LaptopItem> {
                     Row(
                       children: [
                         Text(
-                          "Price: ${widget.price}" ?? "No Title",
+                          "Price: ${widget.data.price}",
                           style: const TextStyle(
                             color: Color(0xFF464646),
                             fontSize: 12,

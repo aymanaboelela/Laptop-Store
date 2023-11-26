@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../core/helper/responsive.dart';
+import '../../../core/helper/responsive.dart';
 
 
 class CotogeryListViwe2 extends StatelessWidget {

@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 import 'package:meta/meta.dart';
 import '../../core/helper/custom_print.dart';
-import '../../data/service/login_service.dart';
+import '../../data/service/service.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
@@ -12,9 +12,10 @@ class AuthCubit extends Cubit<AuthState> {
     emit(LoginInitial());
     try {
       emit(LoginLoading());
-      Service.postData(
-          data: {"phone": phoneNum, "name": fullName},
-          path: "https://magdsoft.ahmedshawky.fun/api/verifyPhone");
+      Service.postData(data: {
+        "phone": phoneNum,
+        "name": fullName,
+      }, path: "https://magdsoft.ahmedshawky.fun/api/verifyPhone");
       emit(LoginSccess());
     } on DioException catch (err) {
       emit(LoginFailure());
@@ -35,4 +36,6 @@ class AuthCubit extends Cubit<AuthState> {
       kPrint(err.response!.statusCode);
     }
   }
+
+
 }

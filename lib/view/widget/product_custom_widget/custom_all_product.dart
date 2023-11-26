@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import '../../../../core/constant/color.dart';
-import '../../../../core/helper/responsive.dart';
+import '../../../core/constant/color.dart';
+import '../../../core/helper/responsive.dart';
 
 class CustemAllprodects extends StatelessWidget {
   const CustemAllprodects({

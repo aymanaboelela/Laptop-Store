@@ -5,6 +5,7 @@ import '../core/helper/go_router.dart';
 import '../cubits/auth_cubit/auth_cubit.dart';
 import '../cubits/data_cubit/data_cubit.dart';
 
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   
@@ -20,9 +21,8 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => DataCubit(),
         ),
       ],
-      child: const MaterialApp(
+      child:const MaterialApp(
         debugShowCheckedModeBanner: false,
-        //  home: HelpPage(),
         initialRoute: "/",
         onGenerateRoute: GoRouter.generateRoute,
       ),

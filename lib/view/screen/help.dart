@@ -1,9 +1,12 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../core/constant/color.dart';
 import '../../core/constant/route.dart';
+import '../../cubits/auth_cubit/auth_cubit.dart';
+import '../../cubits/data_cubit/data_cubit.dart';
 import '../../data/model/help_model.dart';
-import '../../data/service/login_service.dart';
+import '../../data/service/service.dart';
 import '../widget/custom_button.dart';
 import '../widget/custom_help_box.dart';
 
@@ -15,7 +18,8 @@ class HelpPage extends StatefulWidget {
 }
 
 class _HelpPageState extends State<HelpPage> {
-  List<Help> helpModel = [];
+  List<HelpModels> helpModel = [];
+  bool isloading = true;
   @override
   void initState() {
     super.initState();
@@ -25,6 +29,7 @@ class _HelpPageState extends State<HelpPage> {
 
   Future<void> getInit() async {
     helpModel = await Service.getHelp();
+    isloading = false;
     setState(() {});
   }
 
@@ -55,16 +60,28 @@ class _HelpPageState extends State<HelpPage> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: helpModel.length,
-                itemBuilder: (context, index) {
-                  return HelpBox(
-                      title: helpModel[index].question!,
-                      content: helpModel[index].answer!);
+              child: FutureBuilder(
+                future: Service.getHelp(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (context, index) {
+                        List<HelpModels> helpModels = snapshot.data!;
+                        return HelpBox(
+                          helpModels: helpModels[index],
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text("error");
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
                 },
               ),
-            )
+            ),
           ],
         ),
       ),

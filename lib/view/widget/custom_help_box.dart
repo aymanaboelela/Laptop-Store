@@ -1,12 +1,17 @@
-
 import 'package:flutter/material.dart';
+import 'package:laptop_express/data/model/help_model.dart';
 
 import '../../core/constant/color.dart';
 
 class HelpBox extends StatefulWidget {
-  const HelpBox({super.key, required this.content, required this.title});
-  final String content;
-  final String title;
+  const HelpBox({
+    super.key,
+     required this.helpModels,
+  });
+
+  final HelpModels helpModels;
+
+  
   @override
   State<HelpBox> createState() => _HelpBoxState();
 }
@@ -38,7 +43,7 @@ class _HelpBoxState extends State<HelpBox> {
             Row(
               children: [
                 Text(
-                  widget.title,
+                  widget.helpModels.question,
                   textAlign: TextAlign.start,
                   style: const TextStyle(color: kBlue, fontSize: 20),
                 ),
@@ -61,7 +66,7 @@ class _HelpBoxState extends State<HelpBox> {
               child: Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 20),
                 child: Text(
-                  widget.content,
+                  widget.helpModels.answer,
                   textAlign: TextAlign.start,
                   style: const TextStyle(fontSize: 18),
                 ),
